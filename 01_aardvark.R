@@ -16,6 +16,11 @@ library(ggplot2)
 library(ggthemes)
 library(sf) 
 
+#--- Create figures directory ---#
+if(!dir.exists('figures')){
+    dir.create('figures')
+}
+
 #--- Import ---#
 aardvark <- read_csv('data/aardvark-data.csv') %>% 
     clean_names()

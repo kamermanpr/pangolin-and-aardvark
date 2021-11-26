@@ -15,6 +15,11 @@ library(ggplot2)
 library(ggthemes)
 library(sf) 
 
+#--- Create figures directory ---#
+if(!dir.exists('figures')){
+    dir.create('figures')
+}
+
 #--- Import ---#
 pangolin <- read_csv('data/pangolin-data.csv') %>% 
     clean_names()

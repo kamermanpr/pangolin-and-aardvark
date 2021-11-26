@@ -28,7 +28,13 @@ library(janitor)
 library(kableExtra)
 library(ggplot2)
 
+#--- Set scientific notation threshold ---#
 options(scipen = 9999)
+
+#--- Create figures directory ---#
+if(!dir.exists('figures')){
+    dir.create('figures')
+}
 
 #--- Import data ---#
 aardvark <- read_csv('data/aardvark-data.csv') %>% 
