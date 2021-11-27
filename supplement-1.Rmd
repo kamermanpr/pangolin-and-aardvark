@@ -52,6 +52,18 @@ pangolin_predation <- read_csv('data/pangolin-data_drinking-and-predation.csv') 
 
 ----
 
+# Search terms
+
+## Aardvark
+
+Aardvark, erdvark, earthpig, anteater, _Orycteropus_, _afer_, aardvarksafaris, aardvark sightings, aardvark photos
+
+## Pangolin
+
+Pangolin, ground pangolin, scaly anteater, ietermagog, _Smutsia_, _temminkii_, pangolinphotosafaris, pangolin safaris, pangolin photos, pangolin sightings
+
+\newpage
+
 # Aardvarks
 
 ## Number of records from Facebook and Instagram 
