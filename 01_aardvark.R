@@ -174,6 +174,35 @@ ggsave(filename = 'figures/aardvark_time-of-sighting_year.png',
        height = 6, 
        width = 8)
 
+# Presentation plot
+p2b <- ggplot(data = aardvark_time) +
+    aes(x = year, 
+        y = proportion_by_year,
+        fill = time) +
+    geom_col(colour = '#FFFFFF') +
+    labs(title = NULL,
+         x = 'Year',
+         y = 'Proportion of sightings') +
+    scale_fill_tableau(palette = 'Classic Color Blind') +
+    scale_x_discrete(breaks = c('2010', '2012', '2014', '2016', '2018')) +
+    theme_minimal(base_size = 20) +
+    theme(legend.position = 'top',
+          legend.title = element_blank(),
+          legend.text = element_text(size = 14),
+          panel.grid = element_blank(),
+          plot.title = element_text(size = 20),
+          plot.background = element_rect(fill = '#FFFFFF',
+                                         colour = '#FFFFFF'),
+          plot.subtitle = element_text(size = 14),
+          axis.text = element_text(colour = '#000000'),
+          axis.line = element_line(size = 0.5),
+          axis.ticks = element_line(size = 0.5))
+
+ggsave(filename = 'figures/aardvark_time-of-sighting_year_presentation.png',
+       plot = p2b,
+       height = 6, 
+       width = 8)
+
 #--- Plot 3 ---#
 # Day vs night by season (alive animals only)
 
@@ -244,6 +273,35 @@ p3 <- ggplot(data = aardvark_season) +
 
 ggsave(filename = 'figures/aardvark_time-of-sighting_season.png',
        plot = p3,
+       height = 6, 
+       width = 8)
+
+# Presentation plot
+p3b <- ggplot(data = aardvark_season) +
+    aes(x = season, 
+        y = proportion_by_season,
+        fill = time) +
+    geom_col(colour = '#FFFFFF') +
+    labs(title = NULL,
+         x = 'Season',
+         y = 'Proportion of sightings') +
+    scale_fill_tableau(palette = 'Classic Color Blind') +
+    scale_x_discrete(labels = c('Summer', 'Autumn', 'Winter', 'Spring')) +
+    theme_minimal(base_size = 20) +
+    theme(legend.position = 'top',
+          legend.title = element_blank(),
+          legend.text = element_text(size = 14),
+          panel.grid = element_blank(),
+          plot.title = element_text(size = 20),
+          plot.background = element_rect(fill = '#FFFFFF',
+                                         colour = '#FFFFFF'),
+          plot.subtitle = element_text(size = 14),
+          axis.text = element_text(colour = '#000000'),
+          axis.line = element_line(size = 0.5),
+          axis.ticks = element_line(size = 0.5))
+
+ggsave(filename = 'figures/aardvark_time-of-sighting_season_presentation.png',
+       plot = p3b,
        height = 6, 
        width = 8)
 
