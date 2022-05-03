@@ -151,8 +151,9 @@ data_final <- data_cleaned %>%
 
 #--- Tabulated summary ---#
 data_final %>% 
-    select(-c(1:2)) %>% 
-    tbl_summary()
+    select(-c(1:3)) %>% 
+    tbl_summary(label = list(time ~ 'Time of day',
+                             condition_collated ~ 'Body condition'))
 
 #--- Condition vs day/night sighting ---#
 # Plot
