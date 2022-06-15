@@ -202,7 +202,7 @@ alive_aardvark <- aardvark %>%
 
 - Number of alive animals (across all countries): `r alive_aardvark`
 
-## Daytime vs nightime sightings by year
+## Daytime vs night-time sightings by year
 
 - Across all countries.
 
@@ -215,7 +215,7 @@ aardvark_time <- aardvark %>%
     mutate(time = case_when(
         str_detect(time, 'afternoon') ~ 'afternoon',
         str_detect(time, 'sunset') ~ 'afternoon',
-        str_detect(time, 'evening') ~ 'evening/night',
+        str_detect(time, 'evening') ~ 'night-time',
         str_detect(time, 'daylight') ~ 'daytime (not specified)',
         TRUE ~ time
     )) %>% 
@@ -231,7 +231,7 @@ aardvark_time <- aardvark %>%
     fill(total_by_year, .direction = 'updown') %>% 
     mutate(time = factor(time,
                          levels = c('morning', 'daytime (not specified)',
-                                    'afternoon', 'evening/night'),
+                                    'afternoon', 'night-time'),
                          ordered = TRUE)) %>% 
     arrange(year, time)
 
@@ -244,7 +244,7 @@ aardvark_time %>%
                   full_width = TRUE)
 ```
 
-## Daytime vs nightime sightings by season 
+## Daytime vs night-time sightings by season 
 
 - Across all countries.
 
@@ -272,7 +272,7 @@ aardvark_season <- aardvark %>%
     mutate(time = case_when(
         str_detect(time, 'afternoon') ~ 'afternoon',
         str_detect(time, 'sunset') ~ 'afternoon',
-        str_detect(time, 'evening') ~ 'evening/night',
+        str_detect(time, 'evening') ~ 'night-time',
         str_detect(time, 'daylight') ~ 'daytime (not specified)',
         TRUE ~ time
     )) %>% 
@@ -287,7 +287,7 @@ aardvark_season <- aardvark %>%
                                        total_by_season = 140)) %>% 
     mutate(time = factor(time,
                          levels = c('morning', 'daytime (not specified)',
-                                    'afternoon', 'evening/night'),
+                                    'afternoon', 'night-time'),
                          ordered = TRUE)) %>% 
     mutate(season = factor(season, 
                            levels = c('summer', 'autumn', 'winter', 'spring'),
@@ -552,7 +552,7 @@ alive_pangolin <- pangolin %>%
 
 - Number of alive animals (across all countries): `r alive_pangolin`
 
-## Daytime vs nightime sightings by year
+## Daytime vs night-time sightings by year
 
 - Across all countries.
 
@@ -565,7 +565,7 @@ pangolin_time <- pangolin %>%
     mutate(time = case_when(
         str_detect(time, 'afternoon') ~ 'afternoon',
         str_detect(time, 'sunset') ~ 'afternoon',
-        str_detect(time, 'evening') ~ 'evening/night',
+        str_detect(time, 'evening') ~ 'night-time',
         str_detect(time, 'daylight') ~ 'daytime (not specified)',
         TRUE ~ time
     )) %>% 
@@ -580,7 +580,7 @@ pangolin_time <- pangolin %>%
     fill(total_by_year, .direction = 'down') %>% 
     mutate(time = factor(time,
                          levels = c('morning', 'daytime (not specified)',
-                                    'afternoon', 'evening/night'),
+                                    'afternoon', 'night-time'),
                          ordered = TRUE)) %>% 
     arrange(year, time)
 
@@ -593,7 +593,7 @@ pangolin_time %>%
                   full_width = TRUE)
 ```
 
-## Daytime vs nightime sightings by season 
+## Daytime vs night-time sightings by season 
 
 - Across all countries.
 
@@ -621,7 +621,7 @@ pangolin_season <- pangolin %>%
     mutate(time = case_when(
         str_detect(time, 'afternoon') ~ 'afternoon',
         str_detect(time, 'sunset') ~ 'afternoon',
-        str_detect(time, 'evening') ~ 'evening/night',
+        str_detect(time, 'evening') ~ 'night-time',
         str_detect(time, 'daylight') ~ 'daytime (not specified)',
         TRUE ~ time
     )) %>% 
@@ -634,7 +634,7 @@ pangolin_season <- pangolin %>%
     complete(season, time, fill = list(proportion_by_season = 0)) %>% 
     mutate(time = factor(time,
                          levels = c('morning', 'daytime (not specified)',
-                                    'afternoon', 'evening/night'),
+                                    'afternoon', 'night-time'),
                          ordered = TRUE)) %>% 
     mutate(season = factor(season, 
                            levels = c('summer', 'autumn', 'winter', 'spring'),
