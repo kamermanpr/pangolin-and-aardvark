@@ -21,11 +21,14 @@ knitr::opts_chunk$set(echo = FALSE,
 #--- Load packages ---#
 library(dplyr)
 library(tidyr)
+library(tibble)
 library(lubridate)
 library(stringr)
 library(readr)
+library(readxl)
 library(janitor)
 library(kableExtra)
+library(gtsummary)
 library(ggplot2)
 
 #--- Set scientific notation threshold ---#
@@ -42,6 +45,9 @@ aardvark <- read_csv('data/aardvark-data.csv') %>%
 
 aardvark_predation <- read_csv('data/aardvark-data_drinking-and-predation.csv') %>% 
     clean_names()
+
+aardvark_body_condition <- read_xlsx('data/reviewer_3_complete.xlsx',
+                                     sheet = 1)
 
 pangolin <- read_csv('data/pangolin-data.csv') %>% 
     clean_names()
@@ -350,6 +356,74 @@ predation_a %>%
         booktabs = TRUE, longtable = TRUE) %>% 
     kable_styling(latex_options = c('striped', 'HOLD_position', 'repeat_header'),
                   full_width = TRUE)
+```
+
+## Body condition
+
+- Across all countries
+
+- Alive animals only
+
+```{r}
+body_condition_collated <- aardvark_body_condition %>% 
+    mutate(condition_collated = case_when(
+        summary == 'Reviewers agree' ~ reviewer_1,
+        summary == 'Reviewers disagree' ~ reviewer_3,
+        summary == 'Only one reviewer' ~ reviewer_3
+    )) 
+
+body_condition_final <- aardvark %>% 
+    select(number, time) %>% 
+    mutate(time2 = case_when(
+        time == 'afternoon' |
+            time == 'morning' |
+            time == 'daylight' ~ 'Daytime',
+        time == 'evening' ~ 'Night-time'
+    )) %>% 
+    inner_join(body_condition_collated) %>% 
+    select(time2, condition_collated) %>% 
+    filter(!is.na(condition_collated))
+
+body_condition_final %>% 
+    tbl_summary(label = list(time2 ~ 'Time of day',
+                             condition_collated ~ 'Body condition')) %>% 
+    as_tibble() %>% 
+    setNames(nm = c('Time of day', 'N = 481')) %>% 
+    filter(complete.cases(.)) %>% 
+    filter(`Time of day` == 'Daytime' | `Time of day` == 'Night-time') %>% 
+    kbl(caption = 'Summary: Time of day',
+        align = c('lr'),
+        booktabs = TRUE, longtable = TRUE) %>% 
+    kable_styling(latex_options = c('striped', 'HOLD_position', 'repeat_header'),
+                  full_width = TRUE)
+
+body_condition_final %>% 
+    tbl_summary(label = list(time2 ~ 'Time of day',
+                             condition_collated ~ 'Body condition')) %>% 
+    as_tibble() %>% 
+    setNames(nm = c('Body condition', 'N = 481')) %>% 
+    filter(complete.cases(.)) %>% 
+    filter(`Body condition` == 'Good' | `Body condition` == 'Poor') %>% 
+    kbl(caption = 'Summary: Body condition',
+        align = c('lr'),
+        booktabs = TRUE, longtable = TRUE) %>% 
+    kable_styling(latex_options = c('striped', 'HOLD_position', 'repeat_header'),
+                  full_width = TRUE)
+
+body_condition_final %>% 
+    tbl_summary(by = condition_collated,
+                label = list(time2 ~ 'Time of day')) %>%
+    as_tibble() %>% 
+    setNames(nm = c('Time of Day', 
+                    'Good condition (N = 306)', 
+                    'Poor condition (N = 175)')) %>% 
+    filter(complete.cases(.)) %>% 
+    kbl(caption = 'Cross-tabulation: Time of day and body condition',
+        align = c('lrr'),
+        booktabs = TRUE, longtable = TRUE) %>% 
+    kable_styling(latex_options = c('striped', 'HOLD_position', 'repeat_header'),
+                  full_width = TRUE)
+
 ```
 
 \newpage
