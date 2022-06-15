@@ -124,7 +124,7 @@ pangolin_time <- pangolin %>%
     mutate(time = case_when(
         str_detect(time, 'afternoon') ~ 'afternoon',
         str_detect(time, 'sunset') ~ 'afternoon',
-        str_detect(time, 'evening') ~ 'evening/night',
+        str_detect(time, 'evening') ~ 'night-time',
         str_detect(time, 'daylight') ~ 'daytime (not specified)',
         TRUE ~ time
     )) %>% 
@@ -139,7 +139,7 @@ pangolin_time <- pangolin %>%
     fill(total_by_year, .direction = 'down') %>% 
     mutate(time = factor(time,
                          levels = c('morning', 'daytime (not specified)',
-                                    'afternoon', 'evening/night'),
+                                    'afternoon', 'night-time'),
                          ordered = TRUE))
 
 ## Plot
@@ -225,7 +225,7 @@ pangolin_season <- pangolin %>%
     mutate(time = case_when(
         str_detect(time, 'afternoon') ~ 'afternoon',
         str_detect(time, 'sunset') ~ 'afternoon',
-        str_detect(time, 'evening') ~ 'evening/night',
+        str_detect(time, 'evening') ~ 'night-time',
         str_detect(time, 'daylight') ~ 'daytime (not specified)',
         TRUE ~ time
     )) %>% 
@@ -238,7 +238,7 @@ pangolin_season <- pangolin %>%
     complete(season, time, fill = list(proportion_by_season = 0)) %>% 
     mutate(time = factor(time,
                          levels = c('morning', 'daytime (not specified)',
-                                    'afternoon', 'evening/night'),
+                                    'afternoon', 'night-time'),
                          ordered = TRUE)) %>% 
     mutate(season = factor(season, 
                            levels = c('summer', 'autumn', 'winter', 'spring'),

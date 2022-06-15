@@ -125,7 +125,7 @@ aardvark_time <- aardvark %>%
     mutate(time = case_when(
         str_detect(time, 'afternoon') ~ 'afternoon',
         str_detect(time, 'sunset') ~ 'afternoon',
-        str_detect(time, 'evening') ~ 'evening/night',
+        str_detect(time, 'evening') ~ 'night-time',
         str_detect(time, 'daylight') ~ 'daytime (not specified)',
         TRUE ~ time
     )) %>% 
@@ -142,7 +142,7 @@ aardvark_time <- aardvark %>%
     ungroup() %>% 
     mutate(time = factor(time,
                          levels = c('morning', 'daytime (not specified)',
-                                    'afternoon', 'evening/night'),
+                                    'afternoon', 'night-time'),
                          ordered = TRUE))
 
 ## Plot
@@ -228,7 +228,7 @@ aardvark_season <- aardvark %>%
     mutate(time = case_when(
         str_detect(time, 'afternoon') ~ 'afternoon',
         str_detect(time, 'sunset') ~ 'afternoon',
-        str_detect(time, 'evening') ~ 'evening/night',
+        str_detect(time, 'evening') ~ 'night-time',
         str_detect(time, 'daylight') ~ 'daytime (not specified)',
         TRUE ~ time
     )) %>% 
@@ -241,7 +241,7 @@ aardvark_season <- aardvark %>%
     complete(season, time, fill = list(proportion_by_season = 0)) %>% 
     mutate(time = factor(time,
                          levels = c('morning', 'daytime (not specified)',
-                                    'afternoon', 'evening/night'),
+                                    'afternoon', 'night-time'),
                          ordered = TRUE)) %>% 
     mutate(season = factor(season, 
                            levels = c('summer', 'autumn', 'winter', 'spring'),
