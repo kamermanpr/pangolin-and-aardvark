@@ -175,3 +175,8 @@ mod_time <- glm(factor(time) ~ factor(condition_collated),
 
 model_parameters(model = mod_time, 
                  exponentiate = TRUE) 
+
+# Model as Chi-squared
+cross_tab <- xtabs(~time + condition_collated, data = data_final)
+
+chisq.test(cross_tab)
